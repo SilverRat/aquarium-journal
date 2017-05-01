@@ -1,0 +1,30 @@
+{
+  "name": "aquarium-journal",
+  "version": "1.0.0",
+  "description": "Electronic journal for your aquarium",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SilverRat/aquarium-journal.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SilverRat/aquarium-journal/issues"
+  },
+  "homepage": "https://github.com/SilverRat/aquarium-journal#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "config": "^1.25.1",
+    "express": "^4.15.2",
+    "serve-favicon": "^2.4.2",
+    "solr-client": "^0.6.0",
+    "winston": "^2.3.1"
+  }
+}

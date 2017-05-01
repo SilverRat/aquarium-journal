@@ -1,0 +1,22 @@
+<section>
+    <h2 data-bind="text: displayName"></h2>
+    <div>
+        <span><span>pH: </span><span data-bind="text: ph"></span></span><br>
+        <span><span>Free Ammonia (NH3): </span><span data-bind="text: freeAmmonia"></span></span><br>
+        <span><span>Total Ammonia: </span><span data-bind="text: totalAmmonia"></span></span><br>
+        <span><span>Nitrite: </span><span data-bind="text: nitrite"></span></span><br>
+        <span><span>Nitrate: </span><span data-bind="text: nitrate"></span></span><br>
+        <span><span>O2: </span><span data-bind="text: o2"></span></span><br>
+        <span><span>Water Temperature: </span><span data-bind="text: waterTemp"></span></span><br>
+        <span><span>Water Change: </span><span data-bind="text: waterChange"></span></span><br>
+        <span><span>Water Clarity: </span><span data-bind="text: waterClarity"></span></span><br>
+        <span><span>Clean Filter: </span><span data-bind="text: cleanFilter"></span></span><br>
+        <span><span>Date/Time: </span><span data-bind="text: entryDateTime"></span></span><br>
+    </div>
+    <div class="row" data-bind="foreach: entries">
+        <div class="col-sm-6 col-md-3">
+            <span data-bind="text: firstName">
+            </span>
+        </div>
+    </div>
+</section>

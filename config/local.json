@@ -1,0 +1,16 @@
+{
+    "AJ": {
+        "log": {
+            "level": "debug"
+        },
+        "wsTransformer": "faye",
+        "dbApi": "./app/rts-solr-api",
+        "dbConfig": {
+            "server": "",
+            "database": "AJ",
+            "user": "",
+            "password": "stored locally",
+            "port": 1433
+        }
+    }
+}
