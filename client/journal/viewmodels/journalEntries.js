@@ -29,7 +29,25 @@ define(["plugins/http", "durandal/app"], function(http, app) {
 
         addJournalEntry: function() {
             this.entries.push(this.newEntry);
-            this.newEntry = this.createJournalEntry();
-        } // .bind(this)
+
+            const self = this;
+            http.post(location.href.replace(/[^/]*$/, "") + "journalEntry", this.newEntry).then(function() {
+                this.newEntry = this.createJournalEntry();
+            }, function() {
+                // do error stuff
+            });
+        }, // .bind(this)
+
+        updateJournalEntry: function() {
+
+        },
+
+        deleteJournalEntry: function() {
+
+        },
+
+        fetchJournalEntries: function() {
+
+        }
     };
 });

@@ -8,9 +8,9 @@ var logger = null;
 /**
  *
  */
-function getMeetings() {
+function getJournalEntries() {
     var query = client.createQuery()
-        .q({type: "meeting"})
+        .q({type: "journalEntry"})
         .start(0)
         .rows(100);
     client.search(query, function(err, obj) {
@@ -25,8 +25,8 @@ function getMeetings() {
  * Insert new request into database.
  * @param {Request} newRequest
  */
-function addRequest(newRequest) {
-    client.add(newRequest, function(err, obj) {
+function addJournalEntry(newEntry) {
+    client.add(newEntry, function(err, obj) {
         if(err) {
             logger.error(err);
         } else {
@@ -50,7 +50,7 @@ module.exports = function(config, log) {
     return {
         version: "1.0",
         dbType: "Apache Solr",
-        addRequest: addRequest,
-        getMeetings: getMeetings
+        addJournalEntry: addJournalEntry,
+        getJournalEntries: getJournalEntries
     };
 };

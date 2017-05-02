@@ -35,12 +35,12 @@ var ajDbApi = require(dbApi)(dbConfig, winston);
 winston.info("AJ DB API Type: " + ajDbApi.dbType);
 winston.info("AJ DB API Version: " + ajDbApi.version);
 
-app.post("/request", function(req, res) {
-    var request = req.body;
-    winston.info("Adding request from: " + req._remoteAddress);
+app.post("/journalEntry", function(req, res) {
+    var newEntry = req.body;
+    winston.info("Adding journal entry from: " + req._remoteAddress);
     winston.debug("Request data.", request);
-    ajDbApi.addRequest(request);
-    res.end("yes");
+    ajDbApi.addJournalEntry(request);
+    res.end("yes"); //What is this??
 });
 
 app.post("/addMeeting", function(req, res) {
