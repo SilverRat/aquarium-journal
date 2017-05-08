@@ -38,9 +38,9 @@ winston.info("AJ DB API Version: " + ajDbApi.version);
 app.post("/journalEntry", function(req, res) {
     var newEntry = req.body;
     winston.info("Adding journal entry from: " + req._remoteAddress);
-    winston.debug("Request data.", request);
-    ajDbApi.addJournalEntry(request);
-    res.end("yes"); //What is this??
+    winston.debug("Request data.", newEntry);
+    ajDbApi.addJournalEntry(newEntry);
+    res.end("yes");
 });
 
 app.post("/addMeeting", function(req, res) {

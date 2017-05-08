@@ -4,7 +4,7 @@
         "dbApi": "./app/rts-solr-api",
         "dbConfig": {
             "server": "",
-            "database": "AJ",
+            "database": "aj",
             "user": "",
             "password": "",
             "port": 1433

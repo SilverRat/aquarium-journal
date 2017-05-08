@@ -6,10 +6,8 @@
         "dbApi": "./app/rts-solr-api",
         "dbConfig": {
             "host": "127.0.0.1",
-            "core": "AJ",
-            "port": 8983,
-            "user": "",
-            "password": "stored locally"
+            "core": "aj",
+            "port": 8983
         }
     }
 }

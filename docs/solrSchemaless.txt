@@ -1,0 +1,22 @@
+
+--start sample schemaless 
+bin/solr start -e schemaless
+
+
+--Add Fields to the schema w/ no ID included (assuming auto ID generation)
+curl "http://localhost:8983/solr/aj/update?commit=true" -H "Content-type:application/csv" -d '
+ph,freeAmmonia,totalAmmonia,nitrite,nitrate,o2,gh,kh,waterTemp,waterChange,waterClarity,cleanFileter,entryDateTime
+6.8,0.2,8.0,0.5,180,8,4,4,84.5,15,cloudy,false,2017-05-03'
+
+
+--List fields in the schema
+curl http://localhost:8983/solr/aj/schema/fields
+
+
+-- How To: Setup auto UUID on the "id" field.
+-- Add the following update request processor to  <updateRequestProcessorChain . . . 
+--  in the solrconfig.xml
+
+    <processor class="solr.UUIDUpdateProcessorFactory">
+        <str name="fieldName">id</str>  
+    </processor>

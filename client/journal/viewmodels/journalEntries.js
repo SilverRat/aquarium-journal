@@ -19,6 +19,8 @@ define(["plugins/http", "durandal/app"], function(http, app) {
                 nitrite: "",        // 0.0,
                 nitrate: "",        // 0.0,
                 o2: "",             // 0,
+                gh: "",             // 0,
+                kh: "",             // 0,
                 waterTemp: "",      //0.0,
                 waterChange: "",     //0,
                 waterClarity: "",
