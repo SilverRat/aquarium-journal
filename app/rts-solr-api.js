@@ -9,16 +9,21 @@ var logger = null;
  *
  */
 function getJournalEntries() {
-    var query = client.createQuery()
-        .q({type: "journalEntry"})
-        .start(0)
-        .rows(100);
-    client.search(query, function(err, obj) {
-        if(err) {
-            logger.info(err);
-        } else {
-            logger.error(obj);
-        }
+    return new Promise(function(fulfill, reject){
+        var query = client.createQuery()
+            .q("*:*")
+            //.q({type: "journalEntries"})
+            .start(0)
+            .rows(100);
+        client.search(query, function(err, obj) {
+            if(err) {
+                logger.error(err);
+                reject(err);
+            } else {
+                logger.info(obj);            
+                fulfill (obj);
+            }
+        });        
     });
 }
 /**

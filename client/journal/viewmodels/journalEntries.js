@@ -9,6 +9,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
 
         activate: function() {
             this.newEntry = this.createJournalEntry();
+            this.fetchJournalEntries();
         },
 
         createJournalEntry: function() {
@@ -22,8 +23,8 @@ define(["plugins/http", "durandal/app"], function(http, app) {
                 gh: "",             // 0,
                 kh: "",             // 0,
                 waterTemp: "",      //0.0,
-                waterChange: "",     //0,
-                waterClarity: "",
+                volWaterChange: "",     //0,
+                turbidity: "",
                 cleanFilter: false,
                 entryDateTime: new Date()
             };
@@ -49,7 +50,12 @@ define(["plugins/http", "durandal/app"], function(http, app) {
         },
 
         fetchJournalEntries: function() {
-
+            var self=this;
+            http.get(location.href.replace(/[^/]*$/, "") + "journalEntries").then(function(data){
+                self.entries.push.apply(self.entries, data.response.docs);
+            },function(err){
+                // do error stuff
+            });    
         }
     };
 });

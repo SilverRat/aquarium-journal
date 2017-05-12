@@ -61,6 +61,14 @@ app.post("/refreshWall", function(req, res) {
     res.end("yes");
 });
 
-app.get("/meeting", function() {
+app.get("/journalEntries", function(req, res) {
+    winston.info("Querying for journal entries.");
+    ajDbApi.getJournalEntries().then(function(docs){
+        winston.info("Winston - Getting journal entries:", docs);
+        res.send(docs);
+    },function(err){
+        winston.error(err);
+        res.status(500).send(err);
+    });
 
 });
