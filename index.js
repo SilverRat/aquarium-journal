@@ -43,15 +43,10 @@ app.post("/journalEntry", function(req, res) {
     res.end("yes");
 });
 
-app.post("/addMeeting", function(req, res) {
-    var meeting = req.body;
-    winston.info("Adding meeting id: " + meeting.meetingId);
-    res.end("yes");
-});
-
-app.post("/startMeeting", function(req, res) {
-    var meeting = req.body;
-    winston.info("Starting meeeting id: " + meeting.meetingId);
+app.delete("/journalEntry", function(req, res) {
+    var id = req.body;
+    winston.info("Deleting journal entry id: " + id.id);
+    ajDbApi.deleteJournalEntry(id.id);
     res.end("yes");
 });
 

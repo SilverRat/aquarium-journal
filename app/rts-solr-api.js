@@ -47,6 +47,27 @@ function addJournalEntry(newEntry) {
     });
 }
 
+/**
+ * Delete Journal Entry
+ * @param {id} id
+ */
+function deleteJournalEntry(id) {
+    client.deleteByID(id, function(err, obj) {
+        if(err) {
+            logger.error(err);
+        } else {
+            logger.info(obj);
+            client.softCommit(function(err, res) {
+                if(err) {
+                    logger.error(err);
+                } else {
+                    logger.info(res);
+                }
+            });
+        }
+    });
+}
+
 module.exports = function(config, log) {
     logger = log;
 
@@ -56,6 +77,7 @@ module.exports = function(config, log) {
         version: "1.0",
         dbType: "Apache Solr",
         addJournalEntry: addJournalEntry,
-        getJournalEntries: getJournalEntries
+        getJournalEntries: getJournalEntries,
+        deleteJournalEntry: deleteJournalEntry
     };
 };

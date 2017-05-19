@@ -14,15 +14,59 @@
         <span><span>Date/Time: </span><input type="text" data-bind="value: entryDateTime"></input></span><br>
     </div>
     <div><input type="button" value="Add Journal Entry" data-bind="click: addJournalEntry"></input></div>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th> pH </th>
+                    <th> Free Ammonia (NH3) </th>
+                    <th> Total Ammonia </th>           
+                    <th> Nitrite </th>
+                    <th> Nitrate </th>
+                    <th> O2 </th>
+                    <th> Water Temp </th>
+                    <th> Vol Water Change </th>
+                    <th> Turbidity </th>
+                    <th> Clean Filter </th>
+                    <th> Entry Date </th>
+                    <th> Edit </th>
+                    <th> Delete </th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: entries">
+                <tr>    
+                    <td data-bind="text: $data.ph">pH: </td>
+                    <td data-bind="text: $data.freeAmmonia">NH3 </td>
+                    <td data-bind="text: $data.totalAmmonia">Ammonia </td>         
+                    <td data-bind="text: $data.nitrite">Nitrite: </td>
+                    <td data-bind="text: $data.nitrate">Nitrate: </td>
+                    <td data-bind="text: $data.o2">o2: </td>
+                    <td data-bind="text: $data.waterTemp">Water Temp: </td>
+                    <td data-bind="text: $data.volWaterChange">Volume Water Change: </td>
+                    <td data-bind="text: $data.turbidity">Turbidity: </td>
+                    <td data-bind="text: $data.cleanFilter">Clean Filter: </td>        
+                    <td data-bind="text: $data.entryDateTime">Entry Date: </td>
+                    <td> <input type="button" value="Edit" data-bind="click: $parent.editJournalEntry"></input></td>
+                    <td> <input type="button" value="Delete" data-bind="click: $parent.deleteJournalEntry"></input></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--
     <div class="row" data-bind="foreach: entries">
-        <div class="col-sm-6 col-md-3">
+        <div class="col-md-3">
             pH: <span data-bind="text: ph"></span>
         </div>
-        <div class="col-sm-6 col-md-3">
+        <div class="col-md-3">
             Nitrite: <span data-bind="text: nitrite"></span>
         </div>
-        <div class="col-sm-6 col-md-3">
+        <div class="col-md-3">
             Entry Date: <span data-bind="text: entryDateTime"></span>
         </div>
     </div>
+
+    -->
+
 </section>
