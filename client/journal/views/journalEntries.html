@@ -1,19 +1,59 @@
 <section>
     <h2 data-bind="text: displayName"></h2>
     <div data-bind="with: newEntry">
-        <span><span>pH: </span><input type="text" data-bind="value: ph"></input></span><br>
-        <span><span>Free Ammonia (NH3): </span><input type="text" data-bind="value: freeAmmonia"></input></span><br>
-        <span><span>Total Ammonia: </span><input type="text" data-bind="value: totalAmmonia"></input></span><br>
-        <span><span>Nitrite: </span><input type="text" data-bind="value: nitrite"></input></span><br>
-        <span><span>Nitrate: </span><input type="text" data-bind="value: nitrate"></input></span><br>
-        <span><span>O2: </span><input type="text" data-bind="value: o2"></input></span><br>
-        <span><span>Water Temperature: </span><input type="text" data-bind="value: waterTemp"></input></span><br>
-        <span><span>Water Change: </span><input type="text" data-bind="value: volWaterChange"></input></span><br>
-        <span><span>Water Clarity: </span><input type="text" data-bind="value: turbidity"></input></span><br>
-        <span><span>Clean Filter: </span><input type="text" data-bind="value: cleanFilter"></input></span><br>
-        <span><span>Date/Time: </span><input type="text" data-bind="value: entryDateTime"></input></span><br>
+        <div class="row">
+            <div class="col-sm-3">pH</div>
+            <div class="col-sm-6"><input type="text" data-bind="value: ph"></input></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">Free Ammonia (NH3):</div>
+            <div class="col-sm-6"><input type="text" data-bind="value: freeAmmonia"></input></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">Total Ammonia: </div>
+            <div class="col-sm-6"><input type="text" data-bind="value: totalAmmonia"></input></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">Nitrite:</div>
+            <div class="col-sm-6"><input type="text" data-bind="value: nitrite"></input></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">Nitrate:</div>
+            <div class="col-sm-6"><input type="text" data-bind="value: nitrate"></input></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">O2:</div>
+            <div class="col-sm-6"><input type="text" data-bind="value: o2"></input></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">Water Temperature:</div>
+            <div class="col-sm-6"><input type="text" data-bind="value: waterTemp"></input></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">Water Change:</div>
+            <div class="col-sm-6"><input type="text" data-bind="value: volWaterChange"></input></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">Water Clarity:</div>
+            <div class="col-sm-6"><input type="text" data-bind="value: turbidity"></input></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">Clean Filter:</div>
+            <div class="col-sm-6"><input type="text" data-bind="value: cleanFilter"></input></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">Date/Time:</div>
+            <div class="col-sm-6"><input type="text" data-bind="value: entryDateTime"></input></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"><br><input type="button" value="Add Journal Entry" data-bind="click: $root.addJournalEntry, style:{display: id!=='' ?'none':'block'}"></input></div>
+            <div class="col-sm-3"><br><input type="button" value="Update Journal Entry" data-bind="click: $root.addJournalEntry, style:{display: id!=='' ?'block':'none'}"></input></div>
+            <div class="col-sm-3"><br><input type="button" value="Cancel Update" data-bind="click: $root.addJournalEntry, style:{display: id!=='' ?'block':'none'}"></input></div>
+        </div>
     </div>
-    <div><input type="button" value="Add Journal Entry" data-bind="click: addJournalEntry"></input></div>
+
+    <br>
 
     <div class="table-responsive">
         <table class="table">
@@ -35,7 +75,8 @@
                 </tr>
             </thead>
             <tbody data-bind="foreach: entries">
-                <tr>    
+                <tr>
+                    <td data-bind="test: $data.id">id</td>    
                     <td data-bind="text: $data.ph">pH: </td>
                     <td data-bind="text: $data.freeAmmonia">NH3 </td>
                     <td data-bind="text: $data.totalAmmonia">Ammonia </td>         
@@ -53,20 +94,5 @@
             </tbody>
         </table>
     </div>
-
-    <!--
-    <div class="row" data-bind="foreach: entries">
-        <div class="col-md-3">
-            pH: <span data-bind="text: ph"></span>
-        </div>
-        <div class="col-md-3">
-            Nitrite: <span data-bind="text: nitrite"></span>
-        </div>
-        <div class="col-md-3">
-            Entry Date: <span data-bind="text: entryDateTime"></span>
-        </div>
-    </div>
-
-    -->
 
 </section>

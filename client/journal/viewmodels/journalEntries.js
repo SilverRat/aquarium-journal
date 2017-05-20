@@ -9,7 +9,7 @@
 
 /* eslint no-console: "off" */
 define(["plugins/http", "durandal/app"], function(http, app) {
-    return {
+    var vm = {
         displayName: "Journal Entries",
         newEntry: {},
         entries: [],
@@ -21,6 +21,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
 
         createJournalEntry: function() {
             return {
+                id: "",
                 ph: "",             // 0.0,
                 freeAmmonia: "",    // 0.0,
                 totalAmmonia: "",   // 0.0,
@@ -37,41 +38,6 @@ define(["plugins/http", "durandal/app"], function(http, app) {
             };
         },
 
-        addJournalEntry: function() {
-            this.entries.push(this.newEntry); //but this will need an ID to edit.  Maybe reload?
-
-            const self = this;
-            http.post(location.href.replace(/[^/]*$/, "") + "journalEntry", this.newEntry).then(function() {
-                this.newEntry = this.createJournalEntry();
-            }, function() {
-                // do error stuff
-            });
-        }, // .bind(this)
-
-        // edit will stage the data for editing, a subsequent save will call update, or cancel will exit editing.
-        editJournalEntry: function(entry) {
-            this.newEntry = entry;
-            // Todo - add code to hide add button and show update button.  
-            //   Or maybe add can do both, depending on whether an ID exists?
-        },
-
-        updateJournalEntry: function() {
-
-        },
-
-        deleteJournalEntry: function(entry) {
-            var self=this;
-            // http://durandaljs.com/documentation/api.html#module/http/method/remove
-            http.remove(location.href.replace(/[^/]*$/, "") + "journalEntry", { id: entry.id }).then(function(){
-                //remove the entry from the entries array, or just re-load the array?
-                self.entries.length = 0;
-                self.fetchJournalEntries();
-            },function(err){
-                // do error stuff
-            });    
-
-        },
-
         fetchJournalEntries: function() {
             var self=this;
             http.get(location.href.replace(/[^/]*$/, "") + "journalEntries").then(function(data){
@@ -81,4 +47,48 @@ define(["plugins/http", "durandal/app"], function(http, app) {
             });    
         }
     };
+
+    vm.addJournalEntry = function() {
+        this.entries.push(this.newEntry); //but this will need an ID to edit.  Maybe reload?
+
+        const self = this;
+        http.post(location.href.replace(/[^/]*$/, "") + "journalEntry", this.newEntry).then(function(entry) {
+            self.newEntry.id = entry.id;
+            self.newEntry = self.createJournalEntry();
+        }, function() {
+            // do error stuff
+        });
+    }.bind(vm);
+
+    vm.deleteJournalEntry = function(entry) {
+        var self=this;
+        // http://durandaljs.com/documentation/api.html#module/http/method/remove
+        http.remove(location.href.replace(/[^/]*$/, "") + "journalEntry", { id: entry.id }).then(function(){
+            //remove the entry from the entries array, or just re-load the array?
+            self.entries.length = 0;
+            self.fetchJournalEntries();
+        },function(err){
+            // do error stuff
+        });    
+    }.bind(vm);
+
+    // edit will stage the data for editing, a subsequent save will call update, or cancel will exit editing.
+    vm.editJournalEntry = function(entry) {
+        this.newEntry = entry;
+    }.bind(vm);
+
+    vm.updateJournalEntry = function(entry) {
+        // ToDo - Update by ID
+        var self=this;
+        http.put(location.href.replace(/[^/]*$/, "") + "journalEntry", this.newEntry).then(function(){
+            //remove the entry from the entries array, or just re-load the array?
+            self.entries.length = 0;
+            self.fetchJournalEntries();
+        },function(err){
+            // do error stuff
+        });    
+    }.bind(vm);
+
+    return vm;
+
 });

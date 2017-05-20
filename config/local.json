@@ -3,7 +3,7 @@
         "log": {
             "level": "debug"
         },
-        "dbApi": "./app/rts-solr-api",
+        "dbApi": "./app/aj-solr-api",
         "dbConfig": {
             "host": "127.0.0.1",
             "core": "aj",

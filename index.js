@@ -1,6 +1,7 @@
 /* global __dirname, require, process */
 "use strict";
 var winston = require("winston");
+const uuidV4 = require('uuid/v4');
 var config = require("config");
 winston.level = config.get("AJ.log.level");
 
@@ -37,10 +38,11 @@ winston.info("AJ DB API Version: " + ajDbApi.version);
 
 app.post("/journalEntry", function(req, res) {
     var newEntry = req.body;
+    newEntry.id = uuidV4();
     winston.info("Adding journal entry from: " + req._remoteAddress);
     winston.debug("Request data.", newEntry);
     ajDbApi.addJournalEntry(newEntry);
-    res.end("yes");
+    res.send(newEntry);
 });
 
 app.delete("/journalEntry", function(req, res) {
@@ -50,9 +52,11 @@ app.delete("/journalEntry", function(req, res) {
     res.end("yes");
 });
 
-app.post("/refreshWall", function(req, res) {
-    var requests = req.body;
-    winston.info("Refreshing display wall.");
+app.put("/journalEntry", function(req, res) {
+    var updateEntry = req.body;
+    winston.info("Updating journal entry from: " + req._remoteAddress);
+    winston.debug("Request data.", updateEntry);
+    ajDbApi.updateJournalEntry(updateEntry);
     res.end("yes");
 });
 
