@@ -49,7 +49,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
     };
 
     vm.addJournalEntry = function() {
-        this.entries.push(this.newEntry); //but this will need an ID to edit.  Maybe reload?
+        this.entries.push(this.newEntry); 
 
         const self = this;
         http.post(location.href.replace(/[^/]*$/, "") + "journalEntry", this.newEntry).then(function(entry) {
@@ -64,9 +64,8 @@ define(["plugins/http", "durandal/app"], function(http, app) {
         var self=this;
         // http://durandaljs.com/documentation/api.html#module/http/method/remove
         http.remove(location.href.replace(/[^/]*$/, "") + "journalEntry", { id: entry.id }).then(function(){
-            //remove the entry from the entries array, or just re-load the array?
-            self.entries.length = 0;
-            self.fetchJournalEntries();
+            //ToDo: remove the entry from the entries array, or just re-load the array?
+            self.entries.splice(self.entries.indexOf(entry),1);
         },function(err){
             // do error stuff
         });    
@@ -77,15 +76,19 @@ define(["plugins/http", "durandal/app"], function(http, app) {
         this.newEntry = entry;
     }.bind(vm);
 
+    vm.cancelUpdate = function() {
+        this.newEntry = this.createJournalEntry();
+    }.bind(vm);
+
     vm.updateJournalEntry = function(entry) {
-        // ToDo - Update by ID
         var self=this;
         http.put(location.href.replace(/[^/]*$/, "") + "journalEntry", this.newEntry).then(function(){
-            //remove the entry from the entries array, or just re-load the array?
-            self.entries.length = 0;
-            self.fetchJournalEntries();
+            self.newEntry = self.createJournalEntry();
         },function(err){
             // do error stuff
+            console.log(err);
+            self.entries.length = 0;
+            self.fetchJournalEntries();
         });    
     }.bind(vm);
 

@@ -3,53 +3,53 @@
     <div data-bind="with: newEntry">
         <div class="row">
             <div class="col-sm-3">pH</div>
-            <div class="col-sm-6"><input type="text" data-bind="value: ph"></input></div>
+            <div class="col-sm-6"><input type="text" data-bind="value: $data.ph"></input></div>
         </div>
         <div class="row">
             <div class="col-sm-3">Free Ammonia (NH3):</div>
-            <div class="col-sm-6"><input type="text" data-bind="value: freeAmmonia"></input></div>
+            <div class="col-sm-6"><input type="text" data-bind="value: $data.freeAmmonia"></input></div>
         </div>
         <div class="row">
             <div class="col-sm-3">Total Ammonia: </div>
-            <div class="col-sm-6"><input type="text" data-bind="value: totalAmmonia"></input></div>
+            <div class="col-sm-6"><input type="text" data-bind="value: $data.totalAmmonia"></input></div>
         </div>
         <div class="row">
             <div class="col-sm-3">Nitrite:</div>
-            <div class="col-sm-6"><input type="text" data-bind="value: nitrite"></input></div>
+            <div class="col-sm-6"><input type="text" data-bind="value: $data.nitrite"></input></div>
         </div>
         <div class="row">
             <div class="col-sm-3">Nitrate:</div>
-            <div class="col-sm-6"><input type="text" data-bind="value: nitrate"></input></div>
+            <div class="col-sm-6"><input type="text" data-bind="value: $data.nitrate"></input></div>
         </div>
         <div class="row">
             <div class="col-sm-3">O2:</div>
-            <div class="col-sm-6"><input type="text" data-bind="value: o2"></input></div>
+            <div class="col-sm-6"><input type="text" data-bind="value: $data.o2"></input></div>
         </div>
         <div class="row">
             <div class="col-sm-3">Water Temperature:</div>
-            <div class="col-sm-6"><input type="text" data-bind="value: waterTemp"></input></div>
+            <div class="col-sm-6"><input type="text" data-bind="value: $data.waterTemp"></input></div>
         </div>
 
         <div class="row">
             <div class="col-sm-3">Water Change:</div>
-            <div class="col-sm-6"><input type="text" data-bind="value: volWaterChange"></input></div>
+            <div class="col-sm-6"><input type="text" data-bind="value: $data.volWaterChange"></input></div>
         </div>
         <div class="row">
             <div class="col-sm-3">Water Clarity:</div>
-            <div class="col-sm-6"><input type="text" data-bind="value: turbidity"></input></div>
+            <div class="col-sm-6"><input type="text" data-bind="value: $data.turbidity"></input></div>
         </div>
         <div class="row">
             <div class="col-sm-3">Clean Filter:</div>
-            <div class="col-sm-6"><input type="text" data-bind="value: cleanFilter"></input></div>
+            <div class="col-sm-6"><input type="text" data-bind="value: $data.cleanFilter"></input></div>
         </div>
         <div class="row">
             <div class="col-sm-3">Date/Time:</div>
-            <div class="col-sm-6"><input type="text" data-bind="value: entryDateTime"></input></div>
+            <div class="col-sm-6"><input type="text" data-bind="value: $data.entryDateTime"></input></div>
         </div>
         <div class="row">
             <div class="col-sm-3"><br><input type="button" value="Add Journal Entry" data-bind="click: $root.addJournalEntry, style:{display: id!=='' ?'none':'block'}"></input></div>
-            <div class="col-sm-3"><br><input type="button" value="Update Journal Entry" data-bind="click: $root.addJournalEntry, style:{display: id!=='' ?'block':'none'}"></input></div>
-            <div class="col-sm-3"><br><input type="button" value="Cancel Update" data-bind="click: $root.addJournalEntry, style:{display: id!=='' ?'block':'none'}"></input></div>
+            <div class="col-sm-3"><br><input type="button" value="Update Journal Entry" data-bind="click: $root.updateJournalEntry, style:{display: id!=='' ?'block':'none'}"></input></div>
+            <div class="col-sm-3"><br><input type="button" value="Cancel Update" data-bind="click: $root.cancelUpdate, style:{display: id!=='' ?'block':'none'}"></input></div>
         </div>
     </div>
 

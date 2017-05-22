@@ -54,10 +54,12 @@ app.delete("/journalEntry", function(req, res) {
 
 app.put("/journalEntry", function(req, res) {
     var updateEntry = req.body;
+    // Update the values to use the set command to support updating.
+    // var doc = [{"id":req.body.id,"read":{"set":req.body.read}}];
     winston.info("Updating journal entry from: " + req._remoteAddress);
     winston.debug("Request data.", updateEntry);
     ajDbApi.updateJournalEntry(updateEntry);
-    res.end("yes");
+    res.status(204).end(); 
 });
 
 app.get("/journalEntries", function(req, res) {
@@ -69,5 +71,4 @@ app.get("/journalEntries", function(req, res) {
         winston.error(err);
         res.status(500).send(err);
     });
-
 });

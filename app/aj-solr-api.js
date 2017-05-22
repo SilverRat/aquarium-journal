@@ -52,7 +52,8 @@ function addJournalEntry(newEntry) {
  * @param {Request} newRequest
  */
 function updateJournalEntry(updateEntry) {
-    client.update(updateEntry, function(err, obj) {
+    updateEntry._version_ = 0;
+    client.add(updateEntry, function(err, obj) {
         if(err) {
             logger.error(err);
         } else {
