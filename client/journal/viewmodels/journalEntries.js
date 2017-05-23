@@ -41,7 +41,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
         fetchJournalEntries: function() {
             var self=this;
             http.get(location.href.replace(/[^/]*$/, "") + "journalEntries").then(function(data){
-                self.entries.push.apply(self.entries, data.response.docs);
+                self.entries.push.apply(self.entries, data);
             },function(err){
                 // do error stuff
             });    

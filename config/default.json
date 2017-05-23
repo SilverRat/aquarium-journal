@@ -1,13 +1,13 @@
 {
     "AJ": {
-        "wsTransformer": "faye",
-        "dbApi": "./app/rts-solr-api",
+        "log": {
+            "level": "debug"
+        },
+        "dbApi": "./app/aj-solr-api",
         "dbConfig": {
-            "server": "",
-            "database": "aj",
-            "user": "",
-            "password": "",
-            "port": 1433
+            "host": "127.0.0.1",
+            "core": "aj",
+            "port": 8983
         }
     }
 }

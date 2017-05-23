@@ -1,0 +1,11 @@
+{
+    "AJ": {
+        "log": {
+            "level": "debug"
+        },
+        "dbApi": "./app/aj-mongo-api",
+        "dbConfig": {
+            "url": "mongodb://localhost:27017/aj"
+        }
+    }
+}

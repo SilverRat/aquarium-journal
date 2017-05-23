@@ -22,7 +22,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, "client")));
 
 var server = http.createServer(app);
-var transformer = config.get("AJ.wsTransformer");
 
 server.listen(app.get("port"), function() {
     winston.info("Express server listening on port " + app.get("port"));

@@ -21,7 +21,7 @@ function getJournalEntries() {
                 reject(err);
             } else {
                 logger.info(obj);            
-                fulfill (obj);
+                fulfill (obj.response.docs);
             }
         });        
     });
