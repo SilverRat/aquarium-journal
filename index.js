@@ -48,7 +48,7 @@ app.delete("/journalEntry", function(req, res) {
     var id = req.body;
     winston.info("Deleting journal entry id: " + id.id);
     ajDbApi.deleteJournalEntry(id.id);
-    res.end("yes");
+    res.status(204).end();
 });
 
 app.put("/journalEntry", function(req, res) {
