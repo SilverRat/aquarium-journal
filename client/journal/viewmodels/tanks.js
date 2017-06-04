@@ -71,6 +71,10 @@ define(["plugins/http", "durandal/app"], function(http, app) {
         this.newEntry = this.createTankEntry();
     }.bind(vm);
 
+    vm.onClickTankSelection = function(entry) {
+        this.newEntry.tank = entry;
+    }.bind(vm);
+
     vm.updateTankEntry = function(entry) {
         var self=this;
         http.put(location.href.replace(/[^/]*$/, "") + "inventory/tank", this.newEntry).then(function(){

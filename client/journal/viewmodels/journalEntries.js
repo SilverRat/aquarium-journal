@@ -13,10 +13,12 @@ define(["plugins/http", "durandal/app"], function(http, app) {
         displayName: "Journal Entries",
         newEntry: {},
         entries: [],
+        tanks: [],
 
         activate: function() {
             this.newEntry = this.createJournalEntry();
             this.fetchJournalEntries();
+            this.fetchTankEntries();
         },
 
         createJournalEntry: function() {
@@ -32,6 +34,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
                 kh: "",             // 0,
                 waterTemp: "",      //0.0,
                 turbidity: "",
+                tank: "",
                 entryDateTime: new Date()
             };
         },
@@ -43,13 +46,25 @@ define(["plugins/http", "durandal/app"], function(http, app) {
             },function(err){
                 // do error stuff
             });    
+        },
+
+        fetchTankEntries: function() {
+            var self=this;
+            http.get(location.href.replace(/[^/]*$/, "") + "inventory/tanks").then(function(data){
+                var tankNames = data.map(function(t) {
+                    return t.name;
+                });
+                self.tanks.push.apply(self.tanks, tankNames);
+            },function(err){
+                // do error stuff
+            });    
         }
     };
 
     vm.addJournalEntry = function() {
         this.entries.push(this.newEntry); 
 
-        const self = this;
+        var self = this;
         http.post(location.href.replace(/[^/]*$/, "") + "journalEntry", this.newEntry).then(function(entry) {
             self.newEntry.id = entry.id;
             self.newEntry = self.createJournalEntry();

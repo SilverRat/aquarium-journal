@@ -1,7 +1,11 @@
-Update Schema
+Some ToDo's
 
-Add Record Type - Journal Entry, Inventory (Fish, Tanks, Filters) - This level may not be needed  . . .
-Add Event Type - Check Water Chemistry, Change Water, Clean Filter
+Add Record Type field - Journal Entry (done), Inventory (Fish, Tanks (done), Filters) - This level may not be needed  . . .
+Add Event Type field - Check Water Chemistry, Change Water, Clean Filter
+
+Add Water change event end to end
+Add Clean Filter event end to end
+Add Feeding schedule end to end
 
 
 Journal Entries are . . .
