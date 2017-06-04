@@ -11,8 +11,8 @@ var logger = null;
 function getJournalEntries() {
     return new Promise(function(fulfill, reject){
         var query = client.createQuery()
-            .q("*:*")
-            //.q({type: "journalEntries"})
+            //.q("*:*")
+            .q({recordType: "journalEntry"})
             .start(0)
             .rows(100);
         client.search(query, function(err, obj) {
@@ -90,6 +90,25 @@ function deleteJournalEntry(id) {
     });
 }
 
+// Tanks - The only reason I cloned this function is to set the filter. This could be optimized.
+function getTankEntries() {
+    return new Promise(function(fulfill, reject){
+        var query = client.createQuery()
+            .q({recordType: "tank"})
+            .start(0)
+            .rows(100);
+        client.search(query, function(err, obj) {
+            if(err) {
+                logger.error(err);
+                reject(err);
+            } else {
+                logger.info(obj);            
+                fulfill (obj.response.docs);
+            }
+        });        
+    });
+}
+
 module.exports = function(config, log) {
     logger = log;
 
@@ -101,6 +120,9 @@ module.exports = function(config, log) {
         addJournalEntry: addJournalEntry,
         getJournalEntries: getJournalEntries,
         deleteJournalEntry: deleteJournalEntry,
-        updateJournalEntry: updateJournalEntry
+        updateJournalEntry: updateJournalEntry,
+        getTankEntries: getTankEntries
     };
 };
+
+

@@ -31,9 +31,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
                 gh: "",             // 0,
                 kh: "",             // 0,
                 waterTemp: "",      //0.0,
-                volWaterChange: "",     //0,
                 turbidity: "",
-                cleanFilter: false,
                 entryDateTime: new Date()
             };
         },

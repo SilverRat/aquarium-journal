@@ -29,18 +29,9 @@
             <div class="col-sm-3">Water Temperature:</div>
             <div class="col-sm-6"><input type="text" data-bind="value: $data.waterTemp"></input></div>
         </div>
-
-        <div class="row">
-            <div class="col-sm-3">Water Change:</div>
-            <div class="col-sm-6"><input type="text" data-bind="value: $data.volWaterChange"></input></div>
-        </div>
         <div class="row">
             <div class="col-sm-3">Water Clarity:</div>
             <div class="col-sm-6"><input type="text" data-bind="value: $data.turbidity"></input></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">Clean Filter:</div>
-            <div class="col-sm-6"><input type="text" data-bind="value: $data.cleanFilter"></input></div>
         </div>
         <div class="row">
             <div class="col-sm-3">Date/Time:</div>
@@ -59,6 +50,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th> id </th>
                     <th> pH </th>
                     <th> Free Ammonia (NH3) </th>
                     <th> Total Ammonia </th>           
@@ -66,9 +58,7 @@
                     <th> Nitrate </th>
                     <th> O2 </th>
                     <th> Water Temp </th>
-                    <th> Vol Water Change </th>
                     <th> Turbidity </th>
-                    <th> Clean Filter </th>
                     <th> Entry Date </th>
                     <th> Edit </th>
                     <th> Delete </th>
@@ -77,16 +67,14 @@
             <tbody data-bind="foreach: entries">
                 <tr>
                     <td data-bind="test: $data.id">id</td>    
-                    <td data-bind="text: $data.ph">pH: </td>
+                    <td data-bind="text: $data.ph">pH </td>
                     <td data-bind="text: $data.freeAmmonia">NH3 </td>
                     <td data-bind="text: $data.totalAmmonia">Ammonia </td>         
                     <td data-bind="text: $data.nitrite">Nitrite: </td>
                     <td data-bind="text: $data.nitrate">Nitrate: </td>
                     <td data-bind="text: $data.o2">o2: </td>
                     <td data-bind="text: $data.waterTemp">Water Temp: </td>
-                    <td data-bind="text: $data.volWaterChange">Volume Water Change: </td>
                     <td data-bind="text: $data.turbidity">Turbidity: </td>
-                    <td data-bind="text: $data.cleanFilter">Clean Filter: </td>        
                     <td data-bind="text: $data.entryDateTime">Entry Date: </td>
                     <td> <input type="button" value="Edit" data-bind="click: $parent.editJournalEntry"></input></td>
                     <td> <input type="button" value="Delete" data-bind="click: $parent.deleteJournalEntry"></input></td>

@@ -9,7 +9,8 @@
         activate: function() {
             router.map([
                 {route: "", title: "Welcome", moduleId: "viewmodels/welcome", nav: true},
-                {route: "Journal Entries", moduleId: "viewmodels/journalEntries", nav: true}
+                {route: "Journal Entries", moduleId: "viewmodels/journalEntries", nav: true},
+                {route: "Tanks", moduleId: "viewmodels/tanks", nav: true}
             ]).buildNavigationModel();
 
             return router.activate();

@@ -1,0 +1,51 @@
+Update Schema
+
+Add Record Type - Journal Entry, Inventory (Fish, Tanks, Filters) - This level may not be needed  . . .
+Add Event Type - Check Water Chemistry, Change Water, Clean Filter
+
+
+Journal Entries are . . .
+    Check Water Chemistry includes . . .
+        record type
+        event type
+        ph,
+        freeAmmonia,
+        totalAmmonia,
+        nitrite,
+        nitrate,
+        o2,
+        gh,
+        kh,
+        waterTemp,
+        turbidity,
+        tank,
+        entryDateTime
+
+    Change Water includes
+        record type
+        event type
+        volWaterChange,
+        tank,
+        entryDateTime
+
+    Clean Filter includes . . .
+        record type
+        event type
+        filter name
+        biological media Change
+        charcoal Change
+
+Inventory is . . .
+    Tanks
+        record type
+        volume (in gallons)
+        height
+        width
+        depth
+
+    Filter (optional - Phase 2,3,4?)
+        model
+        tank
+        standard maintenance cycle
+        gph
+        max tank size
