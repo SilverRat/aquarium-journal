@@ -35,40 +35,47 @@ var ajDbApi = require(dbApi)(dbConfig, winston);
 winston.info("AJ DB API Type: " + ajDbApi.dbType);
 winston.info("AJ DB API Version: " + ajDbApi.version);
 
-
-//Journal Entries - Water Chemistry tests.
-app.post("/journalEntry", function(req, res) {
+// Generic data wrappers to the abstracted DB api.
+var postData = function(req, res) {
     var newEntry = req.body;
+    var eventType = req.path.replace("/","");  //This will tie the envent type of the record to the URL route/path!!!
     newEntry.id = uuidV4();
-    newEntry.recordType = "journalEntry";
-    winston.info("Adding journal entry from: " + req._remoteAddress);
-    winston.debug("Request data.", newEntry);
+    newEntry.recordType = eventType;
+    winston.info("Adding" + eventType + " entry from: " + req._remoteAddress);
+    winston.info("Request data.", newEntry);
     ajDbApi.addJournalEntry(newEntry);
     res.send(newEntry);
-});
+};
 
-app.delete("/journalEntry", function(req, res) {
+var deleteData = function(req, res) {
     var id = req.body;
-    winston.info("Deleting journal entry id: " + id.id);
+    winston.info("Deleting " + req.path + " entry id: " + id.id);
     ajDbApi.deleteJournalEntry(id.id);
     res.status(204).end();
-});
+};
 
-app.put("/journalEntry", function(req, res) {
+var updateData = function(req, res) {
     var updateEntry = req.body;
     //ensure the record type is not lost on updates.
-    updateEntry.recordType = "journalEntry";
+    updateEntry.recordType = req.path.replace("/",""); 
     // Update the values to use the set command to support updating.
     // var doc = [{"id":req.body.id,"read":{"set":req.body.read}}];
-    winston.info("Updating journal entry from: " + req._remoteAddress);
-    winston.debug("Request data.", updateEntry);
+    winston.info("Updating " + updateEntry.recordType + " from: " + req._remoteAddress);
+    winston.info("Request data.", updateEntry);
     ajDbApi.updateJournalEntry(updateEntry);
     res.status(204).end(); 
-});
+};
+
+//Journal Entries - Water Chemistry tests.
+app.post("/journalEntry", postData);
+
+app.delete("/journalEntry", deleteData);
+
+app.put("/journalEntry", updateData);
 
 app.get("/journalEntries", function(req, res) {
     winston.info("Querying for journal entries.");
-    ajDbApi.getJournalEntries().then(function(docs){
+    ajDbApi.getJournalEntries("journalEntry").then(function(docs){
         winston.info("Winston - Getting journal entries:", docs);
         res.send(docs);
     },function(err){
@@ -78,38 +85,15 @@ app.get("/journalEntries", function(req, res) {
 });
 
 // Tanks
-app.post("/inventory/tank", function(req, res) {
-    var newEntry = req.body;
-    newEntry.id = uuidV4();
-    newEntry.recordType = "tank";
-    winston.info("Adding tank entry from: " + req._remoteAddress);
-    winston.debug("Request data.", newEntry);
-    ajDbApi.addJournalEntry(newEntry);
-    res.send(newEntry);
-});
+app.post("/tank", postData);
 
-app.delete("/inventory/tank", function(req, res) {
-    var id = req.body;
-    winston.info("Deleting tank entry id: " + id.id);
-    ajDbApi.deleteJournalEntry(id.id);
-    res.status(204).end();
-});
+app.delete("/tank", deleteData);
 
-app.put("/inventory/tank", function(req, res) {
-    var updateEntry = req.body;
-    //ensure the record type is not lost on updates.
-    updateEntry.recordType = "tank";
-    // Update the values to use the set command to support updating.
-    // var doc = [{"id":req.body.id,"read":{"set":req.body.read}}];
-    winston.info("Updating tank entry from: " + req._remoteAddress);
-    winston.debug("Request data.", updateEntry);
-    ajDbApi.updateJournalEntry(updateEntry);
-    res.status(204).end(); 
-});
+app.put("/tank", updateData);
 
-app.get("/inventory/tanks", function(req, res) {
+app.get("/tanks", function(req, res) {
     winston.info("Querying for tank entries.");
-    ajDbApi.getTankEntries().then(function(docs){
+    ajDbApi.getJournalEntries("tank").then(function(docs){
         winston.info("Winston - Getting tank entries:", docs);
         res.send(docs);
     },function(err){
@@ -117,3 +101,5 @@ app.get("/inventory/tanks", function(req, res) {
         res.status(500).send(err);
     });
 });
+
+

@@ -50,7 +50,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
 
         fetchTankEntries: function() {
             var self=this;
-            http.get(location.href.replace(/[^/]*$/, "") + "inventory/tanks").then(function(data){
+            http.get(location.href.replace(/[^/]*$/, "") + "tanks").then(function(data){
                 var tankNames = data.map(function(t) {
                     return t.name;
                 });

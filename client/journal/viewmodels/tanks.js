@@ -26,7 +26,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
 
         fetchTankEntries: function() {
             var self=this;
-            http.get(location.href.replace(/[^/]*$/, "") + "inventory/tanks").then(function(data){
+            http.get(location.href.replace(/[^/]*$/, "") + "tanks").then(function(data){
                 self.entries.push.apply(self.entries, data);
             },function(err){
                 // do error stuff
@@ -38,7 +38,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
         this.entries.push(this.newEntry); 
 
         const self = this;
-        http.post(location.href.replace(/[^/]*$/, "") + "inventory/tank", this.newEntry).then(function(entry) {
+        http.post(location.href.replace(/[^/]*$/, "") + "tank", this.newEntry).then(function(entry) {
             self.newEntry.id = entry.id;
             self.newEntry = self.createTankEntry();
         }, function() {
@@ -49,7 +49,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
     vm.deleteTankEntry = function(entry) {
         var self=this;
         // http://durandaljs.com/documentation/api.html#module/http/method/remove
-        http.remove(location.href.replace(/[^/]*$/, "") + "inventory/tank", { id: entry.id }).then(function(){
+        http.remove(location.href.replace(/[^/]*$/, "") + "tank", { id: entry.id }).then(function(){
             //ToDo: remove the entry from the entries array, or just re-load the array?
             self.entries.splice(self.entries.indexOf(entry),1);
         },function(err){
@@ -77,7 +77,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
 
     vm.updateTankEntry = function(entry) {
         var self=this;
-        http.put(location.href.replace(/[^/]*$/, "") + "inventory/tank", this.newEntry).then(function(){
+        http.put(location.href.replace(/[^/]*$/, "") + "tank", this.newEntry).then(function(){
             self.newEntry = self.createTankEntry();
         },function(err){
             // do error stuff
