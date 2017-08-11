@@ -1,5 +1,4 @@
-// Record readings - Ph, Free Ammonia (NH3), Total Ammonia (NH3, NH4), 
-//  Nitrite, Nitrate, O2, Water Temp, Water Change (gallons), Water Clarity, Filter Cleaning
+// Record water adjustments - Ph Up, Ph Down, dechlorinator, salt, copper, misc.
 
 // New idea - add data by event types. 
 //   IE:    check water chemistry (ph, nh3, ammonia, nitrite, nitrate, gh, kh, o2, water temp, turbidity)
@@ -10,7 +9,7 @@
 /* eslint no-console: "off" */
 define(["plugins/http", "durandal/app"], function(http, app) {
     var vm = {
-        displayName: "Journal Entries",
+        displayName: "Water Adjustment",
         newEntry: {},
         entries: [],
         tanks: [],
@@ -21,7 +20,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
             this.fetchTankEntries();
         },
 
-        createJournalEntry: function() {
+        createWaterAdjustment: function() {
             return {
                 id: "",
                 ph: "",             // 0.0,
@@ -39,7 +38,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
             };
         },
 
-        fetchJournalEntries: function() {
+        fetchWaterAdjustments: function() {
             var self=this;
             http.get(location.href.replace(/[^/]*$/, "") + "journalEntries").then(function(data){
                 self.entries.push.apply(self.entries, data);
@@ -61,22 +60,22 @@ define(["plugins/http", "durandal/app"], function(http, app) {
         }
     };
 
-    vm.addJournalEntry = function() {
+    vm.addWaterAdjustment = function() {
         this.entries.push(this.newEntry); 
 
         var self = this;
-        http.post(location.href.replace(/[^/]*$/, "") + "journalEntry", this.newEntry).then(function(entry) {
+        http.post(location.href.replace(/[^/]*$/, "") + "waterAdjustment", this.newEntry).then(function(entry) {
             self.newEntry.id = entry.id;
-            self.newEntry = self.createJournalEntry();
+            self.newEntry = self.createWaterAdjustment();
         }, function() {
             // do error stuff
         });
     }.bind(vm);
 
-    vm.deleteJournalEntry = function(entry) {
+    vm.deleteWaterAdjustment = function(entry) {
         var self=this;
         // http://durandaljs.com/documentation/api.html#module/http/method/remove
-        http.remove(location.href.replace(/[^/]*$/, "") + "journalEntry/" + entry.id).then(function(){
+        http.remove(location.href.replace(/[^/]*$/, "") + "waterAdjustment", { id: entry.id }).then(function(){
             //ToDo: remove the entry from the entries array, or just re-load the array?
             self.entries.splice(self.entries.indexOf(entry),1);
         },function(err){
@@ -85,7 +84,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
     }.bind(vm);
 
     // edit will stage the data for editing, a subsequent save will call update, or cancel will exit editing.
-    vm.editJournalEntry = function(entry) {
+    vm.editWaterAdjustment = function(entry) {
         this.newEntry = entry;
     }.bind(vm);
 
@@ -93,9 +92,9 @@ define(["plugins/http", "durandal/app"], function(http, app) {
         this.newEntry = this.createJournalEntry();
     }.bind(vm);
 
-    vm.updateJournalEntry = function(entry) {
+    vm.updateWaterAdjustment = function(entry) {
         var self=this;
-        http.put(location.href.replace(/[^/]*$/, "") + "journalEntry", this.newEntry).then(function(){
+        http.put(location.href.replace(/[^/]*$/, "") + "waterAdjustment", this.newEntry).then(function(){
             self.newEntry = self.createJournalEntry();
         },function(err){
             // do error stuff

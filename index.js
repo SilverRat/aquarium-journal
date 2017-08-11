@@ -11,6 +11,9 @@ var morgan = require("morgan");
 var bodyParser = require("body-parser");
 var http = require("http");
 var path = require("path");
+//var dataValidation = require("./dataValidation/dataValidation.js");
+var routes = ["/journalEntry","/tank"];
+var idRoutes = ["/journalEntry/:id","/tank/:id"];
 
 var app = express();
 
@@ -20,6 +23,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, "client")));
+//app.use(dataValidation.validate());
 
 var server = http.createServer(app);
 
@@ -48,9 +52,9 @@ var postData = function(req, res) {
 };
 
 var deleteData = function(req, res) {
-    var id = req.body;
-    winston.info("Deleting " + req.path + " entry id: " + id.id);
-    ajDbApi.deleteJournalEntry(id.id);
+    var id = req.params.id;
+    winston.info("Deleting " + req.path);
+    ajDbApi.deleteJournalEntry(id);
     res.status(204).end();
 };
 
@@ -66,9 +70,13 @@ var updateData = function(req, res) {
     res.status(204).end(); 
 };
 
-//Journal Entries - Water Chemistry tests.
-app.post("/journalEntry", postData);
 
+app.post(routes, postData);
+app.delete(idRoutes, deleteData);
+app.put(routes, updateData);
+
+//Journal Entries - Water Chemistry tests.
+// app.post("/journalEntry", postData);
 app.delete("/journalEntry", deleteData);
 
 app.put("/journalEntry", updateData);
@@ -85,7 +93,7 @@ app.get("/journalEntries", function(req, res) {
 });
 
 // Tanks
-app.post("/tank", postData);
+// app.post("/tank", postData);
 
 app.delete("/tank", deleteData);
 

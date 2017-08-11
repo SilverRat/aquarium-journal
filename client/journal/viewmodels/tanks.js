@@ -49,7 +49,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
     vm.deleteTankEntry = function(entry) {
         var self=this;
         // http://durandaljs.com/documentation/api.html#module/http/method/remove
-        http.remove(location.href.replace(/[^/]*$/, "") + "tank", { id: entry.id }).then(function(){
+        http.remove(location.href.replace(/[^/]*$/, "") + "tank/" + entry.id).then(function(){
             //ToDo: remove the entry from the entries array, or just re-load the array?
             self.entries.splice(self.entries.indexOf(entry),1);
         },function(err){

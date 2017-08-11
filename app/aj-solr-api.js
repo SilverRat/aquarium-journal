@@ -31,6 +31,7 @@ function getJournalEntries(rt) {
  * @param {Request} newRequest
  */
 function addJournalEntry(newEntry) {
+    //newEntry._version = -1;   Check this later.  This should ensure duplicate IDs are not added.
     client.add(newEntry, function(err, obj) {
         if(err) {
             logger.error(err);
@@ -52,7 +53,7 @@ function addJournalEntry(newEntry) {
  * @param {Request} newRequest
  */
 function updateJournalEntry(updateEntry) {
-    updateEntry._version_ = 0;
+    updateEntry._version_ = 1; // 0 will add a new object. 1 makes sure the ID exists.
     client.add(updateEntry, function(err, obj) {
         if(err) {
             logger.error(err);
