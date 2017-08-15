@@ -95,7 +95,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
 
     vm.updateJournalEntry = function(entry) {
         var self=this;
-        http.put(location.href.replace(/[^/]*$/, "") + "journalEntry", this.newEntry).then(function(){
+        http.put(location.href.replace(/[^/]*$/, "") + "journalEntry/" + this.newEntry.id, this.newEntry).then(function(){
             self.newEntry = self.createJournalEntry();
         },function(err){
             // do error stuff

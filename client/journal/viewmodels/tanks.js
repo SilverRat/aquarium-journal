@@ -77,7 +77,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
 
     vm.updateTankEntry = function(entry) {
         var self=this;
-        http.put(location.href.replace(/[^/]*$/, "") + "tank", this.newEntry).then(function(){
+        http.put(location.href.replace(/[^/]*$/, "") + "tank/" + this.newEntry.id, this.newEntry).then(function(){
             self.newEntry = self.createTankEntry();
         },function(err){
             // do error stuff

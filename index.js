@@ -60,8 +60,11 @@ var deleteData = function(req, res) {
 
 var updateData = function(req, res) {
     var updateEntry = req.body;
+    updateEntry.id = req.params.id;
     //ensure the record type is not lost on updates.
-    updateEntry.recordType = req.path.replace("/",""); 
+    winston.debug(req.route);
+    var route = req.path.replace("/" + req.params.id, "");
+    updateEntry.recordType = route.slice(1);
     // Update the values to use the set command to support updating.
     // var doc = [{"id":req.body.id,"read":{"set":req.body.read}}];
     winston.info("Updating " + updateEntry.recordType + " from: " + req._remoteAddress);
@@ -70,17 +73,17 @@ var updateData = function(req, res) {
     res.status(204).end(); 
 };
 
-
+//Generic route handling for post,delete,put.
 app.post(routes, postData);
 app.delete(idRoutes, deleteData);
-app.put(routes, updateData);
+app.put(idRoutes, updateData);
+
+
+// Get calls are still specific to the record type because I haven't created a 
+//  Filter object or decided to tie the gets to limit the get to only filter on
+//  record types.
 
 //Journal Entries - Water Chemistry tests.
-// app.post("/journalEntry", postData);
-app.delete("/journalEntry", deleteData);
-
-app.put("/journalEntry", updateData);
-
 app.get("/journalEntries", function(req, res) {
     winston.info("Querying for journal entries.");
     ajDbApi.getJournalEntries("journalEntry").then(function(docs){
@@ -93,12 +96,6 @@ app.get("/journalEntries", function(req, res) {
 });
 
 // Tanks
-// app.post("/tank", postData);
-
-app.delete("/tank", deleteData);
-
-app.put("/tank", updateData);
-
 app.get("/tanks", function(req, res) {
     winston.info("Querying for tank entries.");
     ajDbApi.getJournalEntries("tank").then(function(docs){
