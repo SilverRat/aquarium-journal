@@ -44,6 +44,7 @@ define(["plugins/http", "durandal/app"], function(http, app) {
             http.get(location.href.replace(/[^/]*$/, "") + "journalEntries").then(function(data){
                 self.entries.push.apply(self.entries, data);
             },function(err){
+                console.log('do err stuff: ' + err);
                 // do error stuff
             });    
         },

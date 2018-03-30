@@ -18,8 +18,8 @@ var routes = ["/journalEntry","/tank"];
 var idRoutes = ["/journalEntry/:id","/tank/:id"];
 
 passport.use(new Strategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
+    clientID: config.get("AJ.auth.CLIENT_ID"),
+    clientSecret: config.get("AJ.auth.CLIENT_SECRET"),
     callbackURL: 'http://localhost:3000/login/facebook/return'
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -110,7 +110,7 @@ app.put(idRoutes, updateData);
 //  record types.
 
 //Journal Entries - Water Chemistry tests.
-app.get("/journalEntries", require('connect-ensure-login').ensureLoggedIn(), function(req, res) {
+app.get("/journalEntries", passport.authenticate("facebook"), function(req, res) {
     winston.info("Querying for journal entries.");
     ajDbApi.getJournalEntries("journalEntry").then(function(docs){
         winston.info("Winston - Getting journal entries:", docs);
