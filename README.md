@@ -2,6 +2,8 @@
 
 The Aquarium Journal is a web based application for tracking your aquarium water chemistry, maintenance, feeding, and expenses.
 
+This product is for fish enthusiasts who want to monitor their fish's habitat.  The Aquarium Journal is a device and app that monitors aquarium health & statistics. Unlike other aquarium apps, out product provides a hollistic solution for the customer which supports our strategy to make fish care easy and efficient.
+
 Currently the application will allow you to enter basic information on your tanks and record water chemistry for those tanks.
 
 ## Technology
