@@ -8,7 +8,6 @@ winston.level = config.get("AJ.log.level");
 var express = require("express");
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
-var favicon = require("serve-favicon");
 var morgan = require("morgan");
 var bodyParser = require("body-parser");
 var http = require("http");
@@ -42,7 +41,6 @@ passport.use(new Strategy({
 var app = express();
 
 app.set("port", process.env.PORT || 3000);
-app.use(favicon(__dirname + "/client/favicon.ico"));
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

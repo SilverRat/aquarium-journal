@@ -23,7 +23,6 @@
     "eslint-plugin-jasmine": "^2.2.0",
     "eslint-plugin-requirejs": "^3.1.1",
     "gulp": "^4.0.2",
-    "gulp-durandal": "^1.1.7",
     "gulp-eslint": "^3.0.1",
     "gulp-nodemon": "^2.2.1"
   },
@@ -38,7 +37,6 @@
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "path": "^0.12.7",
-    "serve-favicon": "^2.4.2",
     "solr-client": "^0.7.0",
     "uuid": "^3.0.1",
     "winston": "^2.3.1"
