@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/SilverRat/aquarium-journal#readme",
   "devDependencies": {
-    "browser-sync": "^2.18.8",
     "eslint": "^3.19.0",
     "eslint-config-google": "^0.7.1",
     "eslint-plugin-jasmine": "^2.2.0",

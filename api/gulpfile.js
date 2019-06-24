@@ -25,20 +25,6 @@ gulp.task("eslint", function() {
         .pipe(eslint.failAfterError());
 });
 
-var browserSync = require("browser-sync").create();
-gulp.task("browser-sync", function() {
-    browserSync.init(null, {
-        baseDir: "./client",
-        proxy: {
-            target: "http://localhost:3000"
-        },
-        open: false,
-        port: 7000
-    });
-
-    gulp.watch(paths.app).on("change", browserSync.reload);
-});
-
 var nodemon = require("gulp-nodemon");
 gulp.task("nodemon", function(cb) {
     var started = false;
@@ -53,4 +39,4 @@ gulp.task("nodemon", function(cb) {
     });
 });
 
-gulp.task("default", ["nodemon","browser-sync"]);
+gulp.task("default", ["nodemon"]);
