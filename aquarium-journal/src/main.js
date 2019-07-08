@@ -1,6 +1,8 @@
 // regenerator-runtime is to support async/await syntax in ESNext.
 // If you don't use async/await, you can remove regenerator-runtime.
 import 'regenerator-runtime/runtime';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.css';
 import environment from './environment';
 import {PLATFORM} from 'aurelia-pal';
 
