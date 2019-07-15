@@ -1,110 +1,110 @@
 <template>
-    <section>
-        <h2 value.bind="displayName"></h2>
-        <!-- <div value.bind="with: newEntry">  -->
-        <div>
-            <div class="row">
-                <div class="col-sm-3">Tank</div>
-                <div class="col-sm-6">
-                    <select>
-                        <!-- <select value.bind="options: $root.tanks, newEntry.tank, event: { change: $root.onClickTankSelection }"></select> -->
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">pH</div>
-                <div class="col-sm-6">
-                    <input type="text" value.bind="newEntry.ph"></input>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">Free Ammonia (NH3):</div>
-                <div class="col-sm-6"><input type="text" value.bind="newEntry.freeAmmonia"></input></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">Total Ammonia: </div>
-                <div class="col-sm-6"><input type="text" value.bind="newEntry.totalAmmonia"></input></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">Nitrite:</div>
-                <div class="col-sm-6"><input type="text" value.bind="newEntry.nitrite"></input></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">Nitrate:</div>
-                <div class="col-sm-6"><input type="text" value.bind="newEntry.nitrate"></input></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">O2:</div>
-                <div class="col-sm-6"><input type="text" value.bind="newEntry.o2"></input></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">Water Temperature:</div>
-                <div class="col-sm-6"><input type="text" value.bind="newEntry.waterTemp"></input></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">Water Clarity:</div>
-                <div class="col-sm-6"><input type="text" value.bind="newEntry.turbidity"></input></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">Date/Time:</div>
-                <div class="col-sm-6"><input type="text" value.bind="newEntry.entryDateTime"></input></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3"><br><input type="button" value="Add Journal Entry"
-                        click.delegate="addJournalEntry()"></input></div>
-                <div class="col-sm-3"><br><input type="button" value="Update Journal Entry"
-                        click.delegate="updateJournalEntry(newEntry)"></input></div>
-                <div class="col-sm-3"><br><input type="button" value="Cancel Update"
-                        click.delegate="cancelUpdate()"></input></div>
-            </div>
+  <section>
+    <h2>${displayName}</h2>
+    <!-- <div value.bind="with: newEntry">  -->
+    <div>
+      <div class="row">
+        <div class="col-sm-3">Tank</div>
+        <div class="col-sm-6">
+          <select>
+            <!-- <select value.bind="options: $root.tanks, newEntry.tank, event: { change: $root.onClickTankSelection }"></select> -->
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
         </div>
-
-        <br>
-
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th> id </th>
-                        <th> Tank </th>
-                        <th> pH </th>
-                        <th> Free Ammonia (NH3) </th>
-                        <th> Total Ammonia </th>
-                        <th> Nitrite </th>
-                        <th> Nitrate </th>
-                        <th> O2 </th>
-                        <th> Water Temp </th>
-                        <th> Turbidity </th>
-                        <th> Entry Date </th>
-                        <th> Edit </th>
-                        <th> Delete </th>
-                    </tr>
-                </thead>
-                <!-- <tbody value.bind="foreach: entries"> -->
-                <tbody>
-                    <tr repeat.for="entry of entries">
-                        <td>${entry.id}</td>
-                        <td>${entry.tank}</td>
-                        <td>${entry.ph}</td>
-                        <td>${entry.freeAmmonia}</td>
-                        <td>${entry.totalAmmonia}</td>
-                        <td>${entry.nitrite}</td>
-                        <td>${entry.nitrate}</td>
-                        <td>${entry.o2}</td>
-                        <td>${entry.waterTemp}</td>
-                        <td>${entry.turbidity}</td>
-                        <td>${entry.entryDateTime}</td>
-                        <td> <input type="button" value="Edit" click.delegate="editJournalEntry(entry)"></input></td>
-                        <td> <input type="button" value="Delete" click.delegate="deleteJournalEntry(entry)"></input>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">pH</div>
+        <div class="col-sm-6">
+          <input type="text" value.bind="newEntry.ph"></input>
         </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">Free Ammonia (NH3):</div>
+        <div class="col-sm-6"><input type="text" value.bind="newEntry.freeAmmonia"></input></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">Total Ammonia: </div>
+        <div class="col-sm-6"><input type="text" value.bind="newEntry.totalAmmonia"></input></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">Nitrite:</div>
+        <div class="col-sm-6"><input type="text" value.bind="newEntry.nitrite"></input></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">Nitrate:</div>
+        <div class="col-sm-6"><input type="text" value.bind="newEntry.nitrate"></input></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">O2:</div>
+        <div class="col-sm-6"><input type="text" value.bind="newEntry.o2"></input></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">Water Temperature:</div>
+        <div class="col-sm-6"><input type="text" value.bind="newEntry.waterTemp"></input></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">Water Clarity:</div>
+        <div class="col-sm-6"><input type="text" value.bind="newEntry.turbidity"></input></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">Date/Time:</div>
+        <div class="col-sm-6"><input type="text" value.bind="newEntry.entryDateTime"></input></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3"><br><input type="button" value="Add Journal Entry"
+            click.delegate="addJournalEntry()"></input></div>
+        <div class="col-sm-3"><br><input type="button" value="Update Journal Entry"
+            click.delegate="updateJournalEntry(newEntry)"></input></div>
+        <div class="col-sm-3"><br><input type="button" value="Cancel Update" click.delegate="cancelUpdate()"></input>
+        </div>
+      </div>
+    </div>
 
-    </section>
+    <br>
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th> id </th>
+            <th> Tank </th>
+            <th> pH </th>
+            <th> Free Ammonia (NH3) </th>
+            <th> Total Ammonia </th>
+            <th> Nitrite </th>
+            <th> Nitrate </th>
+            <th> O2 </th>
+            <th> Water Temp </th>
+            <th> Turbidity </th>
+            <th> Entry Date </th>
+            <th> Edit </th>
+            <th> Delete </th>
+          </tr>
+        </thead>
+        <!-- <tbody value.bind="foreach: entries"> -->
+        <tbody>
+          <tr repeat.for="entry of entries">
+            <td>${entry.id}</td>
+            <td>${entry.tank}</td>
+            <td>${entry.ph}</td>
+            <td>${entry.freeAmmonia}</td>
+            <td>${entry.totalAmmonia}</td>
+            <td>${entry.nitrite}</td>
+            <td>${entry.nitrate}</td>
+            <td>${entry.o2}</td>
+            <td>${entry.waterTemp}</td>
+            <td>${entry.turbidity}</td>
+            <td>${entry.entryDateTime}</td>
+            <td> <input type="button" value="Edit" click.delegate="editJournalEntry(entry)"></input></td>
+            <td> <input type="button" value="Delete" click.delegate="deleteJournalEntry(entry)"></input>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </section>
 </template>
