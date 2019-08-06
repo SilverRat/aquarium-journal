@@ -37,16 +37,12 @@ export class tanks {
   }
 
   addTankEntry() {
-    this.entries.push(this.newEntry);
-
     const self = this;
     const http = new HttpClient();
 
-    http.post()
-      .then((entry) => {
-        self.newEntry.id = entry.id;
-        self.newEntry = self.createTankEntry();
-      })
+    http.post("http://localhost:3000/tank", JSON.stringify(self.newEntry))
+      .then(entry => entry.json())
+      .then(tank => this.entries.push(tank))
       .catch(() => {
         // do error stuff
       });
@@ -55,7 +51,7 @@ export class tanks {
   deleteTankEntry() {
     let self = this;
     const http = new HttpClient();
-    
+
     http.remove(location.href.replace(/[^/]*$/, "") + "tank/" + entry.id)
       .then(() => {
         //ToDo: remove the entry from the entries array, or just re-load the array?
