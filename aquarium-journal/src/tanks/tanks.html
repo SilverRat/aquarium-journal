@@ -4,23 +4,23 @@
     <div>
       <div class="row">
         <div class="col-sm-3">Name</div>
-        <div class="col-sm-6"><input type="text" value.bind="newEntry.name"></input></div>
+        <div class="col-sm-6"><input type="text" value.bind="newEntry.tankName"></input></div>
       </div>
       <div class="row">
         <div class="col-sm-3">Volume</div>
-        <div class="col-sm-6"><input type="text" value.bind="newEntry.volume"></input></div>
+        <div class="col-sm-6"><input type="text" value.bind="newEntry.tankVolume"></input></div>
       </div>
       <div class="row">
         <div class="col-sm-3">Height</div>
-        <div class="col-sm-6"><input type="text" value.bind="newEntry.height"></input></div>
+        <div class="col-sm-6"><input type="text" value.bind="newEntry.tankHeight"></input></div>
       </div>
       <div class="row">
         <div class="col-sm-3">Width</div>
-        <div class="col-sm-6"><input type="text" value.bind="newEntry.width"></input></div>
+        <div class="col-sm-6"><input type="text" value.bind="newEntry.tankWidth"></input></div>
       </div>
       <div class="row">
         <div class="col-sm-3">Depth</div>
-        <div class="col-sm-6"><input type="text" value.bind="newEntry.depth"></input></div>
+        <div class="col-sm-6"><input type="text" value.bind="newEntry.tankDepth"></input></div>
       </div>
       <div class="row">
         <div class="col-sm-3">
@@ -58,11 +58,11 @@
         <tbody>
           <tr repeat.for="entry of entries">
             <td>${entry.id || 'No id' }</td>
-            <td>${entry.name || 'No Name' } </td>
-            <td>${entry.volume || 'No Volume' } </td>
-            <td>${entry.height || 'No Height' } </td>
-            <td>${entry.width || 'No Width' } </td>
-            <td>${entry.depth || 'No Depth' } </td>
+            <td>${entry.tankName || 'No Name' } </td>
+            <td>${entry.tankVolume || 'No Volume' } </td>
+            <td>${entry.tankHeight || 'No Height' } </td>
+            <td>${entry.tankWidth || 'No Width' } </td>
+            <td>${entry.tankDepth || 'No Depth' } </td>
             <td>${entry.entryDateTime || 'Entry Date' }</td>
             <td><button type="button" class="btn btn-secondary" click.delegate="editTankEntry(entry)">Edit</button></td>
             <td><button type="button" class="btn btn-danger" click.delegate="deleteTankEntry(entry)">Delete</button>
