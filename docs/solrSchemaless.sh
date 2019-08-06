@@ -1,24 +1,24 @@
+# download solr
+wget http://mirror.metrocast.net/apache/lucene/solr/8.1.1/solr-8.1.1.tgz
 
---start sample schemaless 
+# start sample schemaless 
 bin/solr start -e schemaless
 
 
---Add Fields to the schema w/ no ID included (assuming auto ID generation)
+# Add Fields to the schema w/ no ID included (assuming auto ID generation)
 curl "http://localhost:8983/solr/aj/update?commit=true" -H "Content-type:application/csv" -d '
 recordType, eventType, ph,freeAmmonia,totalAmmonia,nitrite,nitrate,o2,gh,kh,waterTemp,turbidity,entryDateTime, tankName, tankVolume, tankHeight, tankWidth, tankDepth
 journalEntry, Water Change,6.8,0.2,8.0,0.5,180,8,4,4,84.5,cloudy,2017-05-03T15:00:00, fill tank, 30, 12.5, 13.5, 14.5'
 
 
---Delete Fields - This single command approach is OLD and out of date for the fields in the app.
+# Delete Fields - This single command approach is OLD and out of date for the fields in the app.
 curl -X POST -H 'Content-type:application/json' --data-binary '{
   "delete-field" : [{ "name":"ph" }, { "name":"freeAmmonia" }, { "name":"totalAmmonia" },
     { "name":"nitrite" }, { "name":"nitrate" }, { "name":"o2" }, { "name":"gh" }, 
     { "name":"kh" }, { "name":"waterTemp" }, { "name":"volWaterChange" }, { "name":"turbidity" }, { "name":"cleanFilter" }, { "name":"entryDateTime" } ]
 }' http://localhost:8983/solr/aj/schema
 
-
-
---Delete Fields individually
+# Delete Fields individually
 
 curl -X POST -H 'Content-type:application/json' --data-binary '{
   "delete-field" : { "name":"recordType" }
@@ -94,14 +94,14 @@ curl -X POST -H 'Content-type:application/json' --data-binary '{
 
 
 
---List fields in the schema
+# List fields in the schema
 curl http://localhost:8983/solr/aj/schema/fields
 
 
--- How To: Setup auto UUID on the "id" field.
--- Add the following update request processor to  <updateRequestProcessorChain . . . 
---  in the solrconfig.xml
---  BUT returning the GUID on add is freaking impossible, so I left this in, but gen the UUID in code.
+#  How To: Setup auto UUID on the "id" field.
+#  Add the following update request processor to  <updateRequestProcessorChain . . . 
+#   in the solrconfig.xml
+#   BUT returning the GUID on add is freaking impossible, so I left this in, but gen the UUID in code.
 
     <processor class="solr.UUIDUpdateProcessorFactory">
         <str name="fieldName">id</str>  
