@@ -12,6 +12,7 @@ var morgan = require("morgan");
 var bodyParser = require("body-parser");
 var http = require("http");
 var path = require("path");
+const cors = require('cors');
 //var dataValidation = require("./dataValidation/dataValidation.js");
 var routes = ["/journalEntry","/tank"];
 var idRoutes = ["/journalEntry/:id","/tank/:id"];
@@ -48,6 +49,8 @@ app.use(express.static(path.join(__dirname, "client")));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(cors());
 
 var server = http.createServer(app);
 
