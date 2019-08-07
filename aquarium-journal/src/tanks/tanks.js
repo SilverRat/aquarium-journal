@@ -47,11 +47,11 @@ export class tanks {
       });
   }
 
-  deleteTankEntry() {
+  deleteTankEntry(entry) {
     let self = this;
     const http = new HttpClient();
 
-    http.remove(location.href.replace(/[^/]*$/, "") + "tank/" + entry.id)
+    http.delete("http://localhost:3000/tank/" + entry.id)
       .then(() => {
         //ToDo: remove the entry from the entries array, or just re-load the array?
         self.entries.splice(self.entries.indexOf(entry),1);
