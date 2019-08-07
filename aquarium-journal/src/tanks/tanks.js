@@ -27,10 +27,9 @@ export class tanks {
     let self = this;
     const http = new HttpClient();
 
-    http.fetch(location.href.replace(/[^/]*$/, "") + "tanks")
-      .then((data) => {
-        self.entries.push.apply(self.entries, data);
-      })
+    http.fetch("http://localhost:3000/tanks")
+      .then(data => data.json())
+      .then(tanks => self.entries = tanks)
       .catch((err) => {
         // do error stuff
       });
