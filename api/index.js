@@ -6,8 +6,6 @@ var config = require("config");
 winston.level = config.get("AJ.log.level");
 
 var express = require("express");
-var passport = require('passport');
-var Strategy = require('passport-facebook').Strategy;
 var morgan = require("morgan");
 var bodyParser = require("body-parser");
 var http = require("http");
@@ -17,27 +15,7 @@ const cors = require('cors');
 var routes = ["/journalEntry","/tank"];
 var idRoutes = ["/journalEntry/:id","/tank/:id"];
 
-passport.use(new Strategy({
-    clientID: config.get("AJ.auth.CLIENT_ID"),
-    clientSecret: config.get("AJ.auth.CLIENT_SECRET"),
-    callbackURL: 'http://localhost:3000/login/facebook/return'
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    // In this example, the user's Facebook profile is supplied as the user
-    // record.  In a production-quality application, the Facebook profile should
-    // be associated with a user record in the application's database, which
-    // allows for account linking and authentication with other identity
-    // providers.
-    return cb(null, profile);
-  }));
-  
-  passport.serializeUser(function(user, cb) {
-    cb(null, user);
-  });
-  
-  passport.deserializeUser(function(obj, cb) {
-    cb(null, obj);
-  });
+// TODO: implement passport authentication with facebook, google auth, etc.
 
 var app = express();
 
@@ -46,9 +24,6 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, "client")));
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use(cors());
 
@@ -97,7 +72,7 @@ var updateData = function(req, res) {
     winston.info("Updating " + updateEntry.recordType + " from: " + req._remoteAddress);
     winston.info("Request data.", updateEntry);
     ajDbApi.updateJournalEntry(updateEntry);
-    res.status(204).end(); 
+    res.status(204).end();
 };
 
 //Generic route handling for post,delete,put.
@@ -106,12 +81,12 @@ app.delete(idRoutes, deleteData);
 app.put(idRoutes, updateData);
 
 
-// Get calls are still specific to the record type because I haven't created a 
+// Get calls are still specific to the record type because I haven't created a
 //  Filter object or decided to tie the gets to limit the get to only filter on
 //  record types.
 
 //Journal Entries - Water Chemistry tests.
-app.get("/journalEntries", passport.authenticate("facebook"), function(req, res) {
+app.get("/journalEntries", function(req, res) {
     winston.info("Querying for journal entries.");
     ajDbApi.getJournalEntries("journalEntry").then(function(docs){
         winston.info("Winston - Getting journal entries:", docs);
@@ -132,24 +107,4 @@ app.get("/tanks", function(req, res) {
         winston.error(err);
         res.status(500).send(err);
     });
-});
-
-app.get('/login',
-function(req, res){
-  res.render('login');
-});
-
-app.get('/login/facebook',
-passport.authenticate('facebook'));
-
-app.get('/login/facebook/return', 
-passport.authenticate('facebook', { failureRedirect: '/login' }),
-function(req, res) {
-  res.redirect('/');
-});
-
-app.get('/profile',
-require('connect-ensure-login').ensureLoggedIn(),
-function(req, res){
-  res.render('profile', { user: req.user });
 });
