@@ -78,18 +78,21 @@ export class tanks {
     this.newEntry.tank = entry;
   };
 
-  updateTankEntry = (entry) => {
+  updateTankEntry = () => {
     const self = this;
     const http = new HttpClient();
 
-    http.put(location.href.replace(/[^/]*$/, "") + "tank/" + this.newEntry.id, this.newEntry)
-      .then(() => {
-        self.newEntry = self.createTankEntry();
-      }).catch((err) => {
+    http.put("http://localhost:3000/tank/" + self.newEntry.id, JSON.stringify(self.newEntry))
+      .then(res => {
+        if (!res.status === 204) {
+          throw new Error('failed to update tank, check api');
+        }
+      })
+      .then(() => self.fetchTankEntries())
+      .catch((err) => {
         // do error stuff
-        console.log(err);
+        console.log('error caught: ', err);
         self.entries.length = 0;
-        self.fetchTankEntries();
       });
   }
 }
