@@ -7,6 +7,8 @@
 //          clean filter (date, notes)
 //          add chemicals (ph Up, ph Down, dechlorinator, salt, copper)
 
+// TODO: refactor all journal entries just like we did tanks
+
 import { HttpClient } from 'aurelia-fetch-client';
 
 export class journalEntries {
