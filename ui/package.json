@@ -60,7 +60,7 @@
     "require-dir": "^0.3.1",
     "run-sequence": "^1.2.2",
     "vinyl-paths": "^2.1.0",
-    "yargs": "^6.3.0"
+    "yargs": "^17.7.1"
   },
   "jspm": {
     "dependencies": {
